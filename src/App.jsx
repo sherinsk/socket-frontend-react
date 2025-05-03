@@ -10,7 +10,7 @@ function App() {
   const sendNotification = async () => {
     if (!message.trim()) return;
 
-    await fetch('http://localhost:3000/notify', {
+    await fetch('https://socket-backend-nest.onrender.com/notify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message, senderSocketId: socket.id }),
