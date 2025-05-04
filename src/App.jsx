@@ -20,8 +20,19 @@ function App() {
   };
 
   useEffect(() => {
+    // Ask permission for browser notifications
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission();
+    }
     socket.on('receiveNotification', (data) => {
       setIncomingMessage(data.message);
+
+       // Show browser notification if permission is granted
+       if (Notification.permission === 'granted') {
+        new Notification('New Notification', {
+          body: data.message,
+        });
+      }
     });
 
     return () => {
